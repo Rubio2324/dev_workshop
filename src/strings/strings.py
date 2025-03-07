@@ -14,7 +14,9 @@ class Strings:
         Returns:
             bool: True si es palíndromo, False en caso contrario
         """
-        pass
+        texto_limpio = ''.join(c.lower() for c in texto if c.isalnum())
+
+        return texto_limpio == texto_limpio[::-1]
     
     def invertir_cadena(self, texto):
         """
@@ -26,7 +28,10 @@ class Strings:
         Returns:
             str: Cadena invertida
         """
-        pass
+        cadena_invertida = ""
+        for caracter in texto:
+            cadena_invertida = caracter + cadena_invertida  
+        return cadena_invertida
     
     def contar_vocales(self, texto):
         """
@@ -38,7 +43,13 @@ class Strings:
         Returns:
             int: Número de vocales en la cadena
         """
-        pass
+        vocales = "aeiouAEIOU"
+        contador = 0
+        for caracter in texto:
+            if caracter in vocales:
+                contador += 1
+                
+        return contador
     
     def contar_consonantes(self, texto):
         """
@@ -50,7 +61,12 @@ class Strings:
         Returns:
             int: Número de consonantes en la cadena
         """
-        pass
+        vocales = "aeiouAEIOU"
+        contador = 0
+        for caracter in texto:
+            if caracter.isalpha() and caracter not in vocales:
+                contador += 1
+        return contador
     
     def es_anagrama(self, texto1, texto2):
         """
@@ -63,7 +79,7 @@ class Strings:
         Returns:
             bool: True si son anagramas, False en caso contrario
         """
-        pass
+        return sorted(texto1.replace(" ", "").lower()) == sorted(texto2.replace(" ", "").lower())
     
     def contar_palabras(self, texto):
         """
@@ -75,7 +91,7 @@ class Strings:
         Returns:
             int: Número de palabras en la cadena
         """
-        pass
+        return len(texto.split())
     
     def palabras_mayus(self, texto):
         """
@@ -87,7 +103,7 @@ class Strings:
         Returns:
             str: Cadena con la primera letra de cada palabra en mayúscula
         """
-        pass
+        return texto.title()
     
     def eliminar_espacios_duplicados(self, texto):
         """
@@ -99,7 +115,7 @@ class Strings:
         Returns:
             str: Cadena sin espacios duplicados
         """
-        pass
+        return " ".join(texto.split())
     
     def es_numero_entero(self, texto):
         """
@@ -111,7 +127,13 @@ class Strings:
         Returns:
             bool: True si la cadena representa un número entero, False en caso contrario
         """
-        pass
+        if not texto:
+            return False
+
+        if texto[0] in ('-', '+'):
+            texto = texto[1:] 
+
+        return all('0' <= char <= '9' for char in texto) and len(texto) > 0
     
     def cifrar_cesar(self, texto, desplazamiento):
         """
@@ -124,7 +146,19 @@ class Strings:
         Returns:
             str: Cadena cifrada
         """
-        pass
+        resultado = ""
+
+        for caracter in texto:
+            if 'A' <= caracter <= 'Z': 
+                nueva_letra = chr(((ord(caracter) - ord('A') + desplazamiento) % 26) + ord('A'))
+            elif 'a' <= caracter <= 'z':  
+                nueva_letra = chr(((ord(caracter) - ord('a') + desplazamiento) % 26) + ord('a'))
+        else:
+            nueva_letra = caracter 
+
+        resultado += nueva_letra
+
+        return resultado
     
     def descifrar_cesar(self, texto, desplazamiento):
         """
@@ -137,7 +171,17 @@ class Strings:
         Returns:
             str: Cadena descifrada
         """
-        pass
+        for caracter in texto:
+            if 'A' <= caracter <= 'Z':  # Letras mayúsculas
+                nueva_letra = chr(((ord(caracter) - ord('A') - desplazamiento) % 26) + ord('A'))
+            elif 'a' <= caracter <= 'z':  # Letras minúsculas
+                nueva_letra = chr(((ord(caracter) - ord('a') - desplazamiento) % 26) + ord('a'))
+        else:
+            nueva_letra = caracter  # No modifica otros caracteres
+
+        resultado += nueva_letra
+
+        return resultado
     
     def encontrar_subcadena(self, texto, subcadena):
         """
@@ -150,4 +194,12 @@ class Strings:
         Returns:
             list: Lista con las posiciones iniciales de cada ocurrencia
         """
-        pass
+        posiciones = []
+        longitud_texto = len(texto)
+        longitud_subcadena = len(subcadena)
+
+        for i in range(longitud_texto - longitud_subcadena + 1):
+            if texto[i:i + longitud_subcadena] == subcadena:
+                posiciones.append(i)
+
+        return posiciones
