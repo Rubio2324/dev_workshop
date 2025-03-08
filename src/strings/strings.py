@@ -203,3 +203,4 @@ class Strings:
                 posiciones.append(i)
 
         return posiciones
+    
