@@ -40,6 +40,9 @@ class Geometria:
         Returns:
             float: Área del círculo
         """
+        if radio < 0:
+            raise ValueError("El radio no puede ser negativo")
+    
         return math.pi * radio ** 2
     
     def perimetro_circulo(self, radio):
@@ -52,7 +55,10 @@ class Geometria:
         Returns:
             float: Perímetro del círculo
         """
-        return 2*math.pi*radio
+        if radio < 0:
+            raise ValueError("El radio no puede ser negativo")
+    
+        return 2 * math.pi * radio
     
     def area_triangulo(self, base, altura):
         """
@@ -208,7 +214,10 @@ class Geometria:
         Returns:
             float: Volumen de la esfera
         """
-        return (4/3) * math.pi * radio**3
+        if radio < 0:
+            raise ValueError("El radio no puede ser negativo")
+
+        return round((4.0/3.0) * math.pi * radio**3, 2)
     
     def area_superficie_esfera(self, radio):
         """
@@ -220,7 +229,10 @@ class Geometria:
         Returns:
             float: Área de la superficie de la esfera
         """
-        return 4 * math.pi * radio**2
+        if radio < 0:
+            raise ValueError("El radio no puede ser negativo")
+
+        return round(4 * math.pi * radio**2, 2) 
     
     def volumen_cilindro(self, radio, altura):
         """
@@ -233,8 +245,10 @@ class Geometria:
         Returns:
             float: Volumen del cilindro
         """
-        return math.pi * radio**2 * altura
+        if radio < 0 or altura < 0:
+            raise ValueError("El radio y la altura deben ser valores no negativos")
     
+        return round(math.pi * radio**2 * altura, 2) 
     def area_superficie_cilindro(self, radio, altura):
         """
         Calcula el área de la superficie de un cilindro.
@@ -246,7 +260,7 @@ class Geometria:
         Returns:
             float: Área de la superficie del cilindro
         """
-        return (2 * math.pi * radio ** 2) + (2 * math.pi * radio * altura)
+        return 2 * math.pi * radio * (altura + radio)
     
     def distancia_entre_puntos(self, x1, y1, x2, y2):
         """
@@ -261,7 +275,7 @@ class Geometria:
         Returns:
             float: Distancia entre los dos puntos
         """
-        return round(math.hypot(x2 - x1, y2 - y1), 2)
+        return math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2)
     
     def punto_medio(self, x1, y1, x2, y2):
         """
@@ -328,8 +342,14 @@ class Geometria:
         Returns:
             float: Área del polígono regular
         """
+        if num_lados < 3:
+            raise ValueError("El número de lados debe ser al menos 3")
+        if lado <= 0 or apotema <= 0:
+            raise ValueError("La longitud de los lados y la apotema deben ser mayores que cero")
+    
         perimetro = num_lados * lado
-        return (perimetro * apotema) / 2
+        area = (perimetro * apotema) / 2
+        return area
     
     def perimetro_poligono_regular(self, num_lados, lado):
         """
