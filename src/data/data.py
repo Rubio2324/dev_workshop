@@ -50,11 +50,14 @@ class Data:
         Returns:
             list: Lista sin elementos duplicados
         """
-        lista_sin_duplicados = []
+        vistos = []
+        vistos_con_tipo = []
         for elemento in lista:
-            if elemento not in lista_sin_duplicados:
-                lista_sin_duplicados.append(elemento)
-        return lista_sin_duplicados
+            tipo_elemento = type(elemento)
+            if (elemento, tipo_elemento) not in vistos_con_tipo:
+                vistos.append(elemento)
+                vistos_con_tipo.append((elemento, tipo_elemento))
+        return vistos
         
     
     def merge_ordenado(self, lista1, lista2):
@@ -74,14 +77,18 @@ class Data:
         while i < len(lista1) and j < len(lista2):
             if lista1[i] < lista2[j]:
                 resultado.append(lista1[i])
+                i += 1
+            else:
+                resultado.append(lista2[j])
+                j += 1
+    
+        while i < len(lista1):
+            resultado.append(lista1[i])
             i += 1
-        else:
+    
+        while j < len(lista2):
             resultado.append(lista2[j])
             j += 1
-    
-        
-        resultado.extend(lista1[i:])
-        resultado.extend(lista2[j:])
     
         return resultado
     
