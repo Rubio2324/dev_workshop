@@ -1,4 +1,5 @@
 import math
+from math import pi
 class Geometria:
     """
     Class with geometric exercises.
@@ -275,7 +276,7 @@ class Geometria:
         Returns:
             float: Distancia entre los dos puntos
         """
-        return math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2)
+        return round(math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2), 2)
     
     def punto_medio(self, x1, y1, x2, y2):
         """
@@ -342,14 +343,7 @@ class Geometria:
         Returns:
             float: Área del polígono regular
         """
-        if num_lados < 3:
-            raise ValueError("El número de lados debe ser al menos 3")
-        if lado <= 0 or apotema <= 0:
-            raise ValueError("La longitud de los lados y la apotema deben ser mayores que cero")
-    
-        perimetro = num_lados * lado
-        area = (perimetro * apotema) / 2
-        return area
+        return (lados * longitud * apotema) / 2
     
     def perimetro_poligono_regular(self, num_lados, lado):
         """
