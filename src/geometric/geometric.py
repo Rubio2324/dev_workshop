@@ -1,3 +1,4 @@
+import math
 class Geometria:
     """
     Class with geometric exercises.
@@ -42,7 +43,6 @@ class Geometria:
         """
         if radio < 0:
             raise ValueError("El radio no puede ser negativo")
-    
         return math.pi * radio ** 2
     
     def perimetro_circulo(self, radio):
